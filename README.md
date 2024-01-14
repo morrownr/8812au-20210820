@@ -1,11 +1,8 @@
 ## 8812au ( 8812au.ko ) :rocket:
 
-Need testers and coders: I have an updated version of the code for the rtl8812au
-chipset. See issue #114
-
 ## Linux Driver for USB WiFi Adapters that are based on the RTL8812AU Chipset
 
-- v5.13.6 (Realtek) (20210820) plus updates from the Linux community
+- v5.13.6-23-g232107d9b.20210820 (Realtek) plus updates from the Linux community
 
 Note: Please read the file "supported-device-IDs" for information about
 how to confirm that this is the correct driver for your adapter.
@@ -43,12 +40,10 @@ information:
 - AP mode DFS channel support
 - Supported interface modes
   * Managed
-  * Monitor (see FAQ) (see [Monitor_Mode](https://github.com/morrownr/Monitor_Mode)
   * AP
   * P2P-client
   * P2P-GO
 - Log level control
-- LED control
 - Power saving control
 - VHT control (allows 80 MHz channel width in AP mode)
 - AP mode DFS channel control
@@ -84,7 +79,7 @@ supported.
 
 ### Tested Compilers
 
-- gcc 10, 11, 12 and 13
+- gcc 11, 12 and 13
 
 ### Tested Linux Distributions
 
@@ -105,7 +100,7 @@ which can be provided via PR or message in Issues.
 
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling) (kernel 5.15)
 
-- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-05-03)(ARM 32 bit and 64 bit) (kernel 6.1.38)
+- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-12-05)(ARM 32 bit and 64 bit)
 
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
@@ -154,14 +149,6 @@ Note: If you are looking for information about what adapter to buy,
 click [here](https://github.com/morrownr/USB-WiFi) and look for Main
 Menu item 2 which will show information about and links to recommended
 adapters.
-
-Note: If you decide to buy an adapter that is supported by this driver,
-I recommend you search for an adapter that is `single-state and
-single-function`. Multi-function adapters, wifi and bluetooth, can be
-problematic. The rtl8852bu chipset is multi-fuction. The rtl8832bu
-chipset is single-function. For advice about single-state and
-multi-state adapters. click [here](https://github.com/morrownr/USB-WiFi)
-and look for Main Menu item 1.
 
 ### Installation Information
 
@@ -593,20 +580,17 @@ continuous.
 
 Note: Upgrading the driver is advised in the following situations:
 
+- every 2-3 months
 - if a new or updated version of the driver needs to be installed
 - if a distro version upgrade is going to be installed (i.e. going from
 kernel 5.10 to kernel 5.15)
 
-#### Step 1: Move to the driver directory
+#### Step 1: Open a terminal (e.g. Ctrl+Alt+T)
+
+#### Step 2: Move to the driver directory
 
 ```
 cd ~/src/8812au-20210629
-```
-
-#### Step 2: Remove the currently installed driver
-
-```
-sudo ./remove-driver.sh
 ```
 
 #### Step 3: Pull updated code from this repo
@@ -615,7 +599,9 @@ sudo ./remove-driver.sh
 git pull
 ```
 
-#### Step 4: Install the driver
+#### Step 4: Reinstall the driver
+
+Note: The `install-driver.sh` script will automatically remove the previously installed driver.
 
 ```
 sudo ./install-driver.sh
@@ -626,7 +612,6 @@ sudo ./install-driver.sh
 
 Note: Removing the driver is advised in the following situations:
 
-- if driver installation fails
 - if the driver is no longer needed
 
 Note: The following removes everything that has been installed, with the
@@ -653,6 +638,9 @@ sudo ./remove-driver.sh
 -----
 
 ### Recommended WiFi Router/ Access Point Settings
+
+Note: These recommendations apply when using your adapter in managed
+(client) mode, not AP mode.
 
 Note: These are general recommendations, some of which may not apply to
 your specific situation.
@@ -686,7 +674,7 @@ work on 5 GHz. (For US, other countries may vary.)
 
 - Best location for the WiFi router/access point: Near center of
 apartment or house, at least a couple of feet away from walls, in an
-elevated location. You may have to test to see what the best location is
+elevated location. You may have to test to find the best location is
 in your environment.
 
 - Check congestion: There are apps available for smart phones that allow
@@ -703,16 +691,17 @@ After making and saving changes, reboot the router.
 fix a variety of problems.
 
 - If connecting your USB WiFi adapter to a desktop computer, use the USB
-ports on the rear of the computer. Why? The ports on the rear are
-directly connected to the motherboard which will reduce problems with
-interference and disconnection.
+ports on the rear of the computer if you encounter any problems. Why? The
+ports on the rear are directly connected to the motherboard which will
+reduce problems with interference and disconnection. An extension cable
+can be helpful to position the adapter for best reception.
 
 - If your USB WiFi adapter is USB 3 capable and you want it to operate
 in USB3 mode, plug it into a USB 3 port.
 
-- Avoid USB 3.1 Gen 2 ports if possible as almost all currently
-available adapters have been tested with USB 3.1 Gen 1 (aka USB 3) and
-not with USB 3.1 Gen 2.
+- Avoid USB 3.1 Gen 2 ports if possible as most currently available
+adapters have been tested with USB 3.1 Gen 1 (aka USB 3) and not with
+USB 3.1 Gen 2.
 
 - If you use an extension cable and your adapter is USB 3 capable, the
 cable needs to be USB 3 capable (if not, you will be limited to USB 2

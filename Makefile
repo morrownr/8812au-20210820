@@ -96,7 +96,7 @@ CONFIG_80211W = y
 CONFIG_REDUCE_TX_CPU_LOADING = n
 CONFIG_BR_EXT = y
 CONFIG_TDLS = y
-CONFIG_WIFI_MONITOR = y
+CONFIG_WIFI_MONITOR = n
 CONFIG_MCC_MODE = n
 CONFIG_APPEND_VENDOR_IE_ENABLE = n
 CONFIG_RTW_NAPI = y
@@ -1356,20 +1356,8 @@ ifeq ($(CONFIG_PLATFORM_AUTODETECT), y)
 EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
 EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
 
-SUBARCH := $(shell uname -m)
-
-ifeq ($(SUBARCH), aarch64)
-SUBARCH := arm64
-endif
-
-ifeq ($(SUBARCH), armv7l)
-SUBARCH := arm
-endif
-
-ifeq ($(SUBARCH), armv6l)
-SUBARCH := arm
-endif
-
+#SUBARCH := $(shell uname -m)
+SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/ppc/powerpc/; s/armv.l/arm/; s/aarch64/arm64/; s/riscv.*/riscv/;")
 ARCH ?= $(SUBARCH)
 
 CROSS_COMPILE ?=
@@ -2521,7 +2509,8 @@ sign:
 	@mokutil --import MOK.der
 	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8812au.ko
 
-sign-install: sign install
+sign-install:
+	sign install
 
 backup_rtlwifi:
 	@echo "Making backup rtlwifi drivers"
