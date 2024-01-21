@@ -26,21 +26,17 @@ information:
 
 - IEEE 802.11 b/g/n/ac WiFi compliant
 - 802.1x, WEP, WPA TKIP and WPA2 AES/Mixed mode for PSK and TLS (Radius)
-- WPA3-SAE (Personal) (see FAQ)
+- WPA3-SAE (Personal)
 - IEEE 802.11b/g/n/ac Client mode
   * Supports wireless security for WEP, WPA TKIP and WPA2 AES PSK
   * Supports site survey scan and manual connect
   * Supports WPA/WPA2 TLS client
 - Power saving modes
-- Miracast
-- Wireshark compatible
-- Aircrack-ng compatible
-- Packet injection
 - hostapd compatible
 - AP mode DFS channel support
-- Supported interface modes
-  * Managed
-  * AP
+- Interface modes
+  * Managed (client)
+  * Master (AP)
   * P2P-client
   * P2P-GO
 - Log level control
@@ -48,10 +44,6 @@ information:
 - VHT control (allows 80 MHz channel width in AP mode)
 - AP mode DFS channel control
 - USB mode control
-
-### Not supported
-
-- hcxdumptool (see hcxdumptool documentation)
 
 ### A FAQ is available in this repo with the name `FAQ.md`
 
@@ -143,12 +135,7 @@ OpenWRT so it is strongly advised to use the already supported chipsets.
 * Linksys WUSB6300 V1
 * Rosewill RNX-AC1200UBE
 * TRENDnet TEW-805UB
-* Numerous adapters that are based on the supported chipset.
-
-Note: If you are looking for information about what adapter to buy,
-click [here](https://github.com/morrownr/USB-WiFi) and look for Main
-Menu item 2 which will show information about and links to recommended
-adapters.
+* Numerous additional adapters that are based on the supported chipset.
 
 ### Installation Information
 
@@ -158,7 +145,7 @@ zip file if at all possible. Support can only be provided, on a best
 effort basis, if the Installation Steps in the next section are followed.
 
 Warning: Installing multiple out-of-kernel drivers for the same hardware
-usually does not end well. The install-driver.sh script has the
+usually does not end well. The `install-driver.sh` script has the
 capability to detect and remove most conflicting drivers but not all. If
 this driver does not work well after installation and you have
 previously installed a driver that you did not remove, it is suggested
@@ -171,9 +158,9 @@ sudo dkms status
 
 Warning: If you decide to do a distro upgrade, which will likely install
 a new version of kernel such as 5.15 to 6.1, you need to update this
-driver with the newest available code and then run the removal script
-before performing the disto upgrade. Use the following commands in the
-driver directory:
+driver with the newest available code and then reinstall it before
+performing the disto upgrade. Use the following commands in the driver
+directory:
 
 ```
 git pull
