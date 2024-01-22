@@ -33,6 +33,8 @@ EXTRA_CFLAGS += -Wno-enum-int-mismatch
 EXTRA_CFLAGS += -Wno-stringop-overread
 EXTRA_CFLAGS += -Wno-enum-conversion
 EXTRA_CFLAGS += -Wno-int-in-bool-context
+EXTRA_CFLAGS += -Wno-missing-prototypes
+EXTRA_CFLAGS += -Wno-missing-declarations
 
 GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
 ifeq ($(GCC_VER_49),1)
