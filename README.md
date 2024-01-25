@@ -98,7 +98,7 @@ which can be provided via PR or message in Issues.
 
 - [SkiffOS](https://github.com/skiffos/skiffos/) for Odroid XU4 (ARM 32 bit) (kernel 6.0.7)
 
-- [Ubuntu](https://www.ubuntu.com) 22.04 (kernel 5.15) and 22.10 (kernel 5.19) (kernel 6.2)
+- [Ubuntu](https://www.ubuntu.com) 22.04 (kernel 5.15) and 22.10 (kernel 5.19) (kernel 6.5)
 
 - [Void Linux](https://voidlinux.org/) (kernel 5.18)
 
@@ -135,6 +135,7 @@ OpenWRT so it is strongly advised to use the already supported chipsets.
 * Linksys WUSB6300 V1
 * Rosewill RNX-AC1200UBE
 * TRENDnet TEW-805UB
+* Netis WF2190
 * Numerous additional adapters that are based on the supported chipset.
 
 ### Installation Information
