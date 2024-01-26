@@ -206,7 +206,7 @@ if command -v mokutil >/dev/null 2>&1; then
 		*) echo ": This system doesn't support Secure Boot" ;;
 	esac
 else
-	echo ": mokutil not installed"
+	echo ": mokutil not installed (Secure Boot status unknown)"
 fi
 
 echo ": ---------------------------"
@@ -410,8 +410,10 @@ echo "$ sudo sh install-driver.sh"
 echo
 echo "Note: Updates to this driver SHOULD be performed before distro"
 echo "      upgrades such as Ubuntu 23.10 to 24.04."
+echo "Note: Updates to this driver SHOULD be performed before major"
+echo "      upgrades such as kernel 6.5 to 6.6."
 echo "Note: Updates can be performed as often as you like. It is"
-echo "      recommended to update at least every 2 months."
+echo "      recommended to update at least every 3 months."
 echo "Note: Work on this driver, like the Linux kernel, is continuous."
 echo
 echo "Enjoy!"
