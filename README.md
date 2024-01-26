@@ -708,10 +708,10 @@ multiport USB extension can be a good idea in cases like this.
 
 To Contribute:
 
-Fork this repository.
-Make your edits.
-TEST THEM!
-Create a pull request.
+- Fork this repository.
+- Make your edits.
+- TEST THEM!
+- Create a pull request.
 
 -----
 
