@@ -35,8 +35,9 @@ information:
 - hostapd compatible
 - AP mode DFS channel support
 - Interface modes
+  * IBSS (ad-hoc)
   * Managed (client)
-  * Master (AP)
+  * Master (AP) (see file 8812au.conf for hostapd configuration information)
   * P2P-client
   * P2P-GO
 - Log level control
@@ -44,6 +45,10 @@ information:
 - VHT control (allows 80 MHz channel width in AP mode)
 - AP mode DFS channel control
 - USB mode control
+
+Note: Monitor mode is not supported. Linux users that want good
+support for monitor mode in a dual band adapter should seek out USB
+WiFi adapters based on the mt7610u, mt7612u or mt7921au chipsets.
 
 ### A FAQ is available in this repo with the name `FAQ.md`
 
