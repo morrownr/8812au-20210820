@@ -32,12 +32,12 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="remove-driver.sh"
-SCRIPT_VERSION="20240117"
+SCRIPT_VERSION="20240129"
 
 MODULE_NAME="8812au"
 
 DRV_NAME="rtl8812au"
-DRV_VERSION="5.13.6"
+DRV_VERSION="5.13.6-23"
 
 OPTIONS_FILE="${MODULE_NAME}.conf"
 

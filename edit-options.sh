@@ -24,7 +24,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="edit-options.sh"
-# SCRIPT_VERSION="20230710"
+# SCRIPT_VERSION="20240129"
 OPTIONS_FILE="8812au.conf"
 
 # check to ensure sudo was used to start the script
