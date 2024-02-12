@@ -84,11 +84,13 @@ It provides secure boot instructions.
 Question: Is WPA3 supported?
 
 Answer: WPA3-SAE is supported. It works well on most modern Linux distros
-but not all. Generally the reason for WPA3 not working on Linux distros is
-that the distro has an old version of wpa_supplicant or Network Manager.
-Your options are to upgrade to a more modern distro such as those released
-after mid-2022 or compile and install new versions of wpa_supplicant and/or
-Network Manager.
+but perhaps not all. Generally the reason for WPA3 not working on Linux
+distros is that the distro has old versions of components required for
+WPA3 support. This includes but is not limited to utilities such as 
+wpa_supplicant or Network Manager. Your options are to upgrade to a more
+modern distro such as those released after mid-2022 or determine what
+the problem is figure out how to fix it. Fixes could include compiling
+and installing new versions of wpa_supplicant and/or Network Manager.
 
 -----
 
@@ -124,72 +126,13 @@ https://github.com/morrownr/USB-WiFi
 
 Question: Will you put volunteers to work?
 
-Answer: Yes. Post a message in `Issues` or `Discussions` if interested.
+Answer: Yes. Post a message in `Issues` if interested.
 
 -----
 
 Question: I am having problems with my adapter and I use Virtualbox?
 
 Answer: This [article](https://null-byte.wonderhowto.com/forum/wifi-hacking-attach-usb-wireless-adapter-with-virtual-box-0324433/) may help.
-
------
-
-Question: Can you provide additional information about monitor mode?
-
-Answer: I have a repo that is setup to help with monitor mode:
-
-https://github.com/morrownr/Monitor_Mode
-
-Work to improve monitor mode is ongoing with this driver. Your reports of
-success or failure are needed. If you have yet to buy an adapter to use with
-monitor mode, there are adapters available that are known to work very well
-with monitor mode. My recommendation for those looking to buy an adapter for
-monitor mode is to buy adapters based on the following chipsets: mt7921au,
-mt7612u, mt7610u, rtl8821cu, and rtl8812bu. My specific recommendations for
-adapters in order of preference currently are:
-
-ALFA AWUS036ACHM - long range - in-kernel driver
-
-ALFA AWUS036ACM - in-kernel driver
-
-ALFA AWUS036ACU - in-kernel driver (as of kernel 6.2) and [out-of-kernel driver](https://github.com/morrownr/8821cu)
-
-To ask questions, go to [USB-WiFi](https://github.com/morrownr/USB-WiFi)
-and post in `Discussions` or `Issues`.
-
------
-
-Question: How do I forget a saved WiFi network on a Raspberry Pi?
-
-Note: This answer is for the Raspberry Pi OS without Network Manager active.
-
-Step 1: Edit `wpa_supplicant.conf`
-
-```
-sudo ${EDITOR} /etc/wpa_supplicant/wpa_supplicant.conf
-```
-
-Note: Replace ${EDITOR} with the name of the text editor you wish to use.
-
-#### Step 2: Delete the relevant WiFi network block (including the '`network=`' and opening/closing braces).
-
-#### Step 3: Save the file.
-
-#### Step 4: Reboot
-
------
-
-Question: How do I disable the onboard WiFi in a Raspberry Pi?
-
-Note: This answer is for the Raspberry Pi OS.
-
-Answer:
-
-Add the following line to `/boot/config.txt`
-
-```
-dtoverlay=disable-wifi
-```
 
 -----
 
