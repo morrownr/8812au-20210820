@@ -41,6 +41,7 @@ information:
   * P2P-client
   * P2P-GO
 - Log level control
+- LED control
 - Power saving control
 - VHT control (allows 80 MHz channel width in AP mode)
 - AP mode DFS channel control
