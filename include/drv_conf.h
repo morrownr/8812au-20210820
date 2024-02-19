@@ -637,8 +637,8 @@ defined(CONFIG_RTL8723F) /*|| defined(CONFIG_RTL8814A)*/
 	#endif
 #endif
 
-#define MACID_NUM_SW_LIMIT 32
-#define SEC_CAM_ENT_NUM_SW_LIMIT 32
+#define MACID_NUM_SW_LIMIT 64
+#define SEC_CAM_ENT_NUM_SW_LIMIT 64
 
 #ifdef SEC_DEFAULT_KEY_SEARCH
 	#if (CONFIG_IFACE_NUMBER >= 2)
