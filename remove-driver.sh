@@ -16,11 +16,11 @@
 #
 # $ sudo sh remove-driver.sh
 #
-# To check for errors and that this script does not require bash:
+# To check for errors and to check that this script does not require bash:
 #
 # $ shellcheck remove-driver.sh
 #
-# Copyright(c) 2023 Nick Morrow
+# Copyright(c) 2024 Nick Morrow
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of version 2 of the GNU General Public License as
@@ -32,7 +32,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="remove-driver.sh"
-SCRIPT_VERSION="20240129"
+SCRIPT_VERSION="20240222"
 
 MODULE_NAME="8812au"
 
@@ -41,15 +41,15 @@ DRV_VERSION="5.13.6-23"
 
 OPTIONS_FILE="${MODULE_NAME}.conf"
 
-#KARCH="$(uname -m)"
-if [ -z "${KARCH+1}" ]; then
-	KARCH="$(uname -m)"
-fi
+KARCH="$(uname -m)"
+#if [ -z "${KARCH+1}" ]; then
+#	KARCH="$(uname -m)"
+#fi
 
-#KVER="$(uname -r)"
-if [ -z "${KVER+1}" ]; then
-	KVER="$(uname -r)"
-fi
+KVER="$(uname -r)"
+#if [ -z "${KVER+1}" ]; then
+#	KVER="$(uname -r)"
+#fi
 
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 
