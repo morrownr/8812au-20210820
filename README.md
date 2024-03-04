@@ -25,21 +25,22 @@ information:
 ### Supported Features
 
 - IEEE 802.11 b/g/n/ac WiFi compliant
-- 802.1x, WEP, WPA TKIP and WPA2 AES/Mixed mode for PSK and TLS (Radius)
+- 802.1x, WPA2 AES for PSK and TLS (Radius)
 - WPA3-SAE (Personal)
 - IEEE 802.11b/g/n/ac Client mode
-  * Supports wireless security for WEP, WPA TKIP and WPA2 AES PSK
+  * Supports wireless security for WPA2 AES PSK and WPA3-SAE
   * Supports site survey scan and manual connect
-  * Supports WPA/WPA2 TLS client
+  * Supports TLS client
+- TDLS support
 - Power saving modes
 - hostapd compatible
 - AP mode DFS channel support
 - Interface modes
   * IBSS (ad-hoc)
   * Managed (client)
-  * Master (AP) (see file 8812au.conf for hostapd configuration information)
-  * P2P-client
-  * P2P-GO
+  * AP (master) (see file 8812au.conf for hostapd configuration information)
+  * P2P-client (Wi-Fi Direct)
+  * P2P-GO (Wi-Fi Direct)
 - Log level control
 - LED control
 - Power saving control
@@ -47,8 +48,8 @@ information:
 - AP mode DFS channel control
 - USB mode control
 
-Note: Monitor mode is not supported. Linux users that want good
-support for monitor mode in a dual band adapter should seek out USB
+Note: Monitor mode is not supported. Linux users that want good support
+for monitor mode in a dual band or tri-band adapter should seek out USB
 WiFi adapters based on the mt7610u, mt7612u or mt7921au chipsets.
 
 ### A FAQ is available in this repo with the name `FAQ.md`
@@ -84,15 +85,13 @@ supported.
 Note: The information in this section depends largely on user reports
 which can be provided via PR or message in Issues.
 
-- [Arch Linux](https://www.archlinux.org) (kernels 5.4, 5.11 and 6.6 - 6.7)
+- [Arch Linux](https://www.archlinux.org) (kernels 5.4, 5.11 and 6.6)
 
 - [Armbian](https://www.armbian.com/) (kernel 5.15) (Rock 4 SE (Rock 4b image with xfce))
 
-- [Debian](https://www.debian.org/) (kernels 5.10, 5.15 and 6.1)
+- [Debian](https://www.debian.org/) (kernels 5.10, 5.15, 6.1 and 6.6)
 
 - [Fedora](https://getfedora.org) Fedora 38 (6.2.13-300)
-
-- [Kali Linux](https://www.kali.org/) (kernel 6.3)
 
 - [Manjaro](https://manjaro.org) (kernel 5.15)
 
@@ -102,11 +101,7 @@ which can be provided via PR or message in Issues.
 
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
-- [SkiffOS](https://github.com/skiffos/skiffos/) for Odroid XU4 (ARM 32 bit) (kernel 6.0.7)
-
 - [Ubuntu](https://www.ubuntu.com) 22.04 (kernel 5.15) and 22.10 (kernel 5.19) (kernel 6.5)
-
-- [Void Linux](https://voidlinux.org/) (kernel 5.18)
 
 Note: Red Hat Enterprise Linux (RHEL) and distros based on RHEL are
 supported by Red Hat devs due to the way kernel patches are handled in
@@ -131,13 +126,13 @@ OpenWRT so it is strongly advised to use the already supported chipsets.
 
 ### Compatible Devices
 
-* [ALFA AWUS036AC](https://store.rokland.com/collections/wi-fi-usb-adapters/products/alfa-awus036ac-802-11ac-long-range-dual-band-wifi-usb-adapter)
-* [ALFA AWUS036ACH](https://store.rokland.com/collections/wi-fi-usb-adapters/products/alfa-awus036ach-802-11ac-high-power-ac1200-dual-band-wifi-usb-adapter)
-* [ALFA AWUS036EAC](https://store.rokland.com/collections/wi-fi-usb-adapters/products/alfa-awus036eac-802-11ac-ac1200-dual-band-wifi-usb-adapter-dongle)
+* ALFA AWUS036ACH
+* ALFA AWUS036AC
+* ALFA AWUS036EAC
 * ASUS USB-AC56 Dual-Band AC1200 Adapter (H/W ver. A1)
 * Belkin F9L1109
 * Buffalo - WI-U3-866D
-* [Edimax EW-7822UAC](https://www.amazon.com/Edimax-EW-7822UAC-Dual-Band-Adjustable-Performance/dp/B00BXAXO7C) - Edimax made the source for this driver available.
+* Edimax EW-7822UAC
 * Linksys WUSB6300 V1
 * Rosewill RNX-AC1200UBE
 * TP-Link Archer T4U V1
@@ -150,7 +145,8 @@ OpenWRT so it is strongly advised to use the already supported chipsets.
 Warning: It is recommended that you follow the installation instructions
 in the Installation Steps section. Avoid installation by downloading the
 zip file if at all possible. Support can only be provided, on a best
-effort basis, if the Installation Steps in the next section are followed.
+effort basis, if the instructions in the Installation Steps section are
+followed.
 
 Warning: Installing multiple out-of-kernel drivers for the same hardware
 usually does not end well. The `install-driver.sh` script has the
@@ -173,16 +169,6 @@ directory:
 ```
 git pull
 ```
-
-Note: Do not reboot before running the below command so that the driver
-stays active until after your distro upgrade is complete.
-
-```
-sudo sh remove-driver.sh
-```
-
-Note: The following command will reinstall the updated driver after you
-are finished with the distro upgrade and reboot.
 
 ```
 sudo sh install-driver.sh
@@ -221,9 +207,9 @@ Secure Boot: see FAQ.
 
 Note: The installation instructions are for the novice user. Experienced
 users are welcome to alter the installation to meet their needs. Support
-will be provided, on a best effort basis, based on the steps below. Another
-way to word this paragraph is that if you do not follow the below steps for
-installation, you are your own tech support.
+will be provided, on a best effort basis, based on the steps below.
+Another way to word this paragraph is that if you do not follow the
+below steps for installation, you are your own tech support.
 
 #### Step 1: Open a terminal (e.g. Ctrl+Alt+T)
 
@@ -389,7 +375,7 @@ cd ~/src/8812au-20210820
 #### Step 8: Run the installation script (`install-driver.sh`)
 
 Important: The compilation may fail if the major version of gcc that is
-in use is not the same as the major version of the gcc that was used to
+in use is not the same as the major version of gcc that was used to
 compile the kernel that is in use:
 
 Example of bad situation:
@@ -454,7 +440,7 @@ sudo mokutil --import /var/lib/dkms/mok.pub
 
 ### Manual Installation Instructions
 
-Note: The installation script, install-driver.sh, automates the
+Note: The installation script, `install-driver.sh` , automates the
 installation process, however, if you want to or need to do a basic
 command line installation, use the following:
 
@@ -545,7 +531,7 @@ installed in your distro.
 
 ### Driver Options (`edit-options.sh`)
 
-Note: In Linux, driver options are called module parameters.
+Note: In Linux, driver options are also called `module parameters` .
 
 A file called `8812au.conf` will be installed in `/etc/modprobe.d` by
 default if you use the installation script, `install-driver.sh`. If you
@@ -596,7 +582,8 @@ git pull
 
 #### Step 4: Reinstall the driver
 
-Note: The `install-driver.sh` script will automatically remove the previously installed driver.
+Note: The `install-driver.sh` script will automatically remove the
+previously installed driver.
 
 ```
 sudo ./install-driver.sh
@@ -686,10 +673,10 @@ After making and saving changes, reboot the router.
 fix a variety of problems.
 
 - If connecting your USB WiFi adapter to a desktop computer, use the USB
-ports on the rear of the computer if you encounter any problems. Why? The
-ports on the rear are directly connected to the motherboard which will
-reduce problems with interference and disconnection. An extension cable
-can be helpful to position the adapter for best reception.
+ports on the rear of the computer if you encounter any problems. Why?
+The ports on the rear are directly connected to the motherboard which
+will reduce problems with interference and disconnection. An extension
+cable can be helpful to position the adapter for best reception.
 
 - If your USB WiFi adapter is USB 3 capable and you want it to operate
 in USB3 mode, plug it into a USB 3 port.
