@@ -16,6 +16,13 @@
 #
 # $ sudo sh install-driver.sh
 #
+# Note: It is common for Realtek out-of-kernel drivers to have many
+# source files set to executable. This can cause problems in some
+# situations. To remove executable from files only, run the following
+# in the subdirectories:
+#
+# find . -type f -exec chmod -x {} \;
+#
 # To check for errors and to check that this script does not require bash:
 #
 # $ shellcheck remove-driver.sh
