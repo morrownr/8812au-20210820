@@ -36,10 +36,12 @@ information:
 - hostapd compatible
 - AP mode DFS channel support
 - Interface modes
+  * IBSS (ad-hoc)
   * Managed (client)
   * AP (master) (see file 8812au.conf for hostapd configuration information)
   * P2P-client (Wi-Fi Direct)
   * P2P-GO (Wi-Fi Direct)
+  * Concurrent (see docs folder for information)
 - Log level control
 - LED control
 - Power saving control
