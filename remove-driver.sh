@@ -32,7 +32,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="remove-driver.sh"
-SCRIPT_VERSION="20240222"
+SCRIPT_VERSION="20240314"
 
 MODULE_NAME="8812au"
 
@@ -53,12 +53,14 @@ KVER="$(uname -r)"
 
 MODDESTDIR="/lib/modules/${KVER}/kernel/drivers/net/wireless/"
 
+
 # check to ensure sudo or su - was used to start the script
 if [ "$(id -u)" -ne 0 ]; then
 	echo "You must run this script with superuser (root) privileges."
 	echo "Try: \"sudo ./${SCRIPT_NAME}\""
 	exit 1
 fi
+
 
 # support for the NoPrompt option allows non-interactive use of this script
 NO_PROMPT=0
@@ -80,19 +82,22 @@ done
 
 echo ": ---------------------------"
 
+
 # displays script name and version
 echo ": ${SCRIPT_NAME} v${SCRIPT_VERSION}"
 
-# information that helps with bug reports
 
+# information that helps with bug reports
 # display kernel architecture
 echo ": ${KARCH} (kernel architecture)"
+
 
 # display kernel version
 echo ": ${KVER} (kernel version)"
 
 echo ": ---------------------------"
 echo
+
 
 # check for and remove non-dkms installations
 # standard naming
@@ -101,6 +106,7 @@ if [ -f "${MODDESTDIR}${MODULE_NAME}.ko" ]; then
 	rm -f "${MODDESTDIR}"${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
 fi
+
 
 # check for and remove non-dkms installations
 # with rtl added to module name (PClinuxOS)
@@ -111,6 +117,7 @@ if [ -f "${MODDESTDIR}rtl${MODULE_NAME}.ko" ]; then
 	/sbin/depmod -a "${KVER}"
 fi
 
+
 # check for and remove non-dkms installations
 # with compressed module in a unique non-standard location (Armbian)
 # Example: /usr/lib/modules/5.15.80-rockchip64/kernel/drivers/net/wireless/rtl8821cu/8821cu.ko.xz
@@ -120,8 +127,8 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 	/sbin/depmod -a "${KVER}"
 fi
 
+
 # check for and remove dkms installations
-#
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS="/,: " read -r drvname drvver kerver _dummy; do
 		case "$drvname" in *${MODULE_NAME})
@@ -142,12 +149,14 @@ if command -v dkms >/dev/null 2>&1; then
 	fi
 fi
 
+
 # ensure the driver directory is clean in case driver was manually compiled
 make clean >/dev/null 2>&1
 echo "The driver was removed successfully."
 echo "You may now delete the driver directory if desired."
 echo ": ---------------------------"
 echo
+
 
 # if NoPrompt is not used, ask user some questions
 if [ $NO_PROMPT -ne 1 ]; then

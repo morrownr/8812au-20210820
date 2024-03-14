@@ -27,12 +27,14 @@ SCRIPT_NAME="edit-options.sh"
 # SCRIPT_VERSION="20240129"
 OPTIONS_FILE="8812au.conf"
 
+
 # check to ensure sudo was used to start the script
 if [ "$(id -u)" -ne 0 ]; then
 	echo "You must run this script with superuser (root) privileges."
 	echo "Try: \"sudo ./${SCRIPT_NAME}\""
 	exit 1
 fi
+
 
 DEFAULT_EDITOR="$(cat default-editor.txt)"
 # try to find the user's default text editor through the EDITORS_SEARCH array
@@ -47,12 +49,14 @@ if ! command -v "${TEXT_EDITOR}" >/dev/null 2>&1; then
         exit 1
 fi
 
+
 if [ -f "/etc/modprobe.d/${OPTIONS_FILE}" ]; then
 	${TEXT_EDITOR} /etc/modprobe.d/${OPTIONS_FILE}
 else
 	cp -f ${OPTIONS_FILE} /etc/modprobe.d
 	${TEXT_EDITOR} /etc/modprobe.d/${OPTIONS_FILE}
 fi
+
 
 printf "Do you want to apply the new options by rebooting now? (recommended) [Y/n] "
 read -r yn
