@@ -39,7 +39,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20240314"
+SCRIPT_VERSION="20240322"
 
 MODULE_NAME="8812au"
 
@@ -249,9 +249,9 @@ if [ -f "${MODDESTDIR}${MODULE_NAME}.ko" ]; then
 	echo "Removing a non-dkms installation: ${MODDESTDIR}${MODULE_NAME}.ko"
 	rm -f "${MODDESTDIR}"${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
-	echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
+	echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
 	rm -f /etc/modprobe.d/${OPTIONS_FILE}
-	echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+	echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
 	make clean >/dev/null 2>&1
 	echo "Removal complete."
@@ -265,9 +265,9 @@ if [ -f "${MODDESTDIR}rtl${MODULE_NAME}.ko" ]; then
 	echo "Removing a non-dkms installation: ${MODDESTDIR}rtl${MODULE_NAME}.ko"
 	rm -f "${MODDESTDIR}"rtl${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
-	echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
+	echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
 	rm -f /etc/modprobe.d/${OPTIONS_FILE}
-	echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+	echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
 	make clean >/dev/null 2>&1
 	echo "Removal complete."
@@ -281,9 +281,9 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 	echo "Removing a non-dkms installation: /usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz"
 	rm -f /usr/lib/modules/"${KVER}"/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz
 	/sbin/depmod -a "${KVER}"
-	echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
+	echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
 	rm -f /etc/modprobe.d/${OPTIONS_FILE}
-	echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+	echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
 	make clean >/dev/null 2>&1
 	echo "Removal complete."
@@ -302,21 +302,21 @@ if command -v dkms >/dev/null 2>&1; then
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
-		echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
+		echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
 		rm /etc/modprobe.d/${OPTIONS_FILE}
 	fi
 	if [ -d /usr/src/${DRV_NAME}-${DRV_VERSION} ]; then
-		echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+		echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 		rm -r /usr/src/${DRV_NAME}-${DRV_VERSION}
 	fi
 fi
 
-echo "Finished checking for and removing previously installed drivers."
+echo "Finished checking for and uninstalling previously installed drivers."
 echo ": ---------------------------"
 
 echo
 echo "Starting installation."
-echo "Installing ${OPTIONS_FILE} to /etc/modprobe.d"
+echo "Copying ${OPTIONS_FILE} to /etc/modprobe.d"
 cp -f ${OPTIONS_FILE} /etc/modprobe.d
 
 
