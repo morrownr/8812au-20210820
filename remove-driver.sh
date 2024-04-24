@@ -32,7 +32,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="remove-driver.sh"
-SCRIPT_VERSION="20240314"
+SCRIPT_VERSION="20240409"
 
 MODULE_NAME="8812au"
 
@@ -99,60 +99,78 @@ echo ": ---------------------------"
 echo
 
 
-# check for and remove non-dkms installations
+# check for and uninstall non-dkms installations
 # standard naming
 if [ -f "${MODDESTDIR}${MODULE_NAME}.ko" ]; then
-	echo "Removing a non-dkms installation: ${MODDESTDIR}${MODULE_NAME}.ko"
+	echo "Uninstalling a non-dkms installation:"
+	echo "${MODDESTDIR}${MODULE_NAME}.ko"
 	rm -f "${MODDESTDIR}"${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
+	echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
+	rm -f /etc/modprobe.d/${OPTIONS_FILE}
+	echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+	make clean >/dev/null 2>&1
 fi
 
 
-# check for and remove non-dkms installations
+# check for and uninstall non-dkms installations
 # with rtl added to module name (PClinuxOS)
 # Dear PCLinuxOS devs, the driver name uses rtl, the module name does not.
 if [ -f "${MODDESTDIR}rtl${MODULE_NAME}.ko" ]; then
-	echo "Removing a non-dkms installation: ${MODDESTDIR}rtl${MODULE_NAME}.ko"
+	echo "Uninstalling a non-dkms installation:"
+	echo "${MODDESTDIR}rtl${MODULE_NAME}.ko"
 	rm -f "${MODDESTDIR}"rtl${MODULE_NAME}.ko
 	/sbin/depmod -a "${KVER}"
+	echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
+	rm -f /etc/modprobe.d/${OPTIONS_FILE}
+	echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+	make clean >/dev/null 2>&1
 fi
 
 
-# check for and remove non-dkms installations
-# with compressed module in a unique non-standard location (Armbian)
+# check for and uninstall non-dkms installations
+# with module in a unique non-standard location (Armbian)
 # Example: /usr/lib/modules/5.15.80-rockchip64/kernel/drivers/net/wireless/rtl8821cu/8821cu.ko.xz
 if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz" ]; then
-	echo "Removing a non-dkms installation: /usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz"
+	echo "Uninstalling a non-dkms installation:"
+	echo "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz"
 	rm -f /usr/lib/modules/"${KVER}"/kernel/drivers/net/wireless/${DRV_NAME}/${MODULE_NAME}.ko.xz
 	/sbin/depmod -a "${KVER}"
+	echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
+	rm -f /etc/modprobe.d/${OPTIONS_FILE}
+	echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+	rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+	make clean >/dev/null 2>&1
 fi
 
 
-# check for and remove dkms installations
+# check for and uninstall dkms installations
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS="/,: " read -r drvname drvver kerver _dummy; do
 		case "$drvname" in *${MODULE_NAME})
 			if [ "${kerver}" = "added" ]; then
+				echo "Removing a driver that was added to dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" --all
 			else
+				echo "Uninstalling a driver that was installed by dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" -k "${kerver}" -c "/usr/src/${drvname}-${drvver}/dkms.conf"
 			fi
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
-		echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
+		echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
 		rm /etc/modprobe.d/${OPTIONS_FILE}
 	fi
 	if [ -d /usr/src/${DRV_NAME}-${DRV_VERSION} ]; then
-		echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+		echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 		rm -r /usr/src/${DRV_NAME}-${DRV_VERSION}
 	fi
 fi
 
 
-# ensure the driver directory is clean in case driver was manually compiled
-make clean >/dev/null 2>&1
-echo "The driver was removed successfully."
+echo "The driver was uninstalled successfully."
 echo "You may now delete the driver directory if desired."
 echo ": ---------------------------"
 echo

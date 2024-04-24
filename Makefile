@@ -23,6 +23,9 @@ EXTRA_CFLAGS += -Wno-implicit-fallthrough
 # Activates Concurrent Mode if uncommented
 #EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
 
+# Changes REGD sourse to OS
+#EXTRA_CFLAGS += -DCONFIG_REGD_SRC_FROM_OS
+
 # gcc-12
 EXTRA_CFLAGS += -Wno-address
 EXTRA_CFLAGS += -Wframe-larger-than=1648
