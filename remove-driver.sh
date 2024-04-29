@@ -146,7 +146,7 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 fi
 
 
-# check for and uninstall dkms installations
+# check for and remove dkms installations
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS="/,: " read -r drvname drvver kerver _dummy; do
 		case "$drvname" in *${MODULE_NAME})
@@ -154,17 +154,17 @@ if command -v dkms >/dev/null 2>&1; then
 				echo "Removing a driver that was added to dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" --all
 			else
-				echo "Uninstalling a driver that was installed by dkms."
+				echo "Removing a driver that was installed by dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" -k "${kerver}" -c "/usr/src/${drvname}-${drvver}/dkms.conf"
 			fi
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
-		echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
+		echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
 		rm /etc/modprobe.d/${OPTIONS_FILE}
 	fi
 	if [ -d /usr/src/${DRV_NAME}-${DRV_VERSION} ]; then
-		echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+		echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 		rm -r /usr/src/${DRV_NAME}-${DRV_VERSION}
 	fi
 fi

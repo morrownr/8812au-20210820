@@ -39,7 +39,7 @@
 # GNU General Public License for more details.
 
 SCRIPT_NAME="install-driver.sh"
-SCRIPT_VERSION="20240409"
+SCRIPT_VERSION="20240429"
 
 MODULE_NAME="8812au"
 
@@ -92,66 +92,6 @@ do
 	esac
 	shift
 done
-
-
-# check to ensure gcc is installed
-if ! command -v gcc >/dev/null 2>&1; then
-	echo "A required package is not installed."
-	echo "Please install the following package: gcc"
-	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-	exit 1
-fi
-
-
-# check to ensure bc is installed
-if ! command -v bc >/dev/null 2>&1; then
-	echo "A required package is not installed."
-	echo "Please install the following package: bc"
-	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-	exit 1
-fi
-
-
-# check to ensure make is installed
-if ! command -v make >/dev/null 2>&1; then
-	echo "A required package is not installed."
-	echo "Please install the following package: make"
-	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-	exit 1
-fi
-
-
-# check to see if the correct header files are installed
-if [ ! -d "/lib/modules/$(uname -r)/build" ]; then
-	echo "Your kernel header files aren't properly installed."
-	echo "Please consult your distro documentation or user support forums."
-	echo "Once the header files are properly installed, please run \"sudo ./${SCRIPT_NAME}\""
-	exit 1
-fi
-
-
-# ensure /usr/sbin is in the PATH so iw can be found
-#if ! echo "$PATH" | grep -qw sbin; then
-#        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-#fi
-
-
-# check to ensure iw is installed
-#if ! command -v iw >/dev/null 2>&1; then
-#	echo "A required package is not installed."
-#	echo "Please install the following package: iw"
-#	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-#	exit 1
-#fi
-
-
-# check to ensure rfkill is installed
-#if ! command -v rfkill >/dev/null 2>&1; then
-#	echo "A required package is not installed."
-#	echo "Please install the following package: rfkill"
-#	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
-#	exit 1
-#fi
 
 
 # set default editor
@@ -240,6 +180,68 @@ fi
 echo ": ---------------------------"
 echo
 
+
+# check to ensure gcc is installed
+if ! command -v gcc >/dev/null 2>&1; then
+	echo "A required package is not installed."
+	echo "Please install the following package: gcc"
+	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+	exit 1
+fi
+
+
+# check to ensure bc is installed
+if ! command -v bc >/dev/null 2>&1; then
+	echo "A required package is not installed."
+	echo "Please install the following package: bc"
+	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+	exit 1
+fi
+
+
+# check to ensure make is installed
+if ! command -v make >/dev/null 2>&1; then
+	echo "A required package is not installed."
+	echo "Please install the following package: make"
+	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+	exit 1
+fi
+
+
+# check to see if the correct header files are installed
+# deactivated due to a problem with fedora 40 - investigating
+#if [ ! -d "/lib/modules/$(uname -r)/build" ]; then
+#	echo "Your kernel header files aren't properly installed."
+#	echo "Please consult your distro documentation or user support forums."
+#	echo "Once the header files are properly installed, please run \"sudo ./${SCRIPT_NAME}\""
+#	exit 1
+#fi
+
+
+# ensure /usr/sbin is in the PATH so iw can be found
+#if ! echo "$PATH" | grep -qw sbin; then
+#        export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#fi
+
+
+# check to ensure iw is installed
+#if ! command -v iw >/dev/null 2>&1; then
+#	echo "A required package is not installed."
+#	echo "Please install the following package: iw"
+#	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+#	exit 1
+#fi
+
+
+# check to ensure rfkill is installed
+#if ! command -v rfkill >/dev/null 2>&1; then
+#	echo "A required package is not installed."
+#	echo "Please install the following package: rfkill"
+#	echo "Once the package is installed, please run \"sudo ./${SCRIPT_NAME}\""
+#	exit 1
+#fi
+
+
 echo "Checking for previously installed drivers..."
 
 
@@ -290,7 +292,7 @@ if [ -f "/usr/lib/modules/${KVER}/kernel/drivers/net/wireless/${DRV_NAME}/${MODU
 fi
 
 
-# check for and uninstall dkms installations
+# check for and remove dkms installations
 if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS="/,: " read -r drvname drvver kerver _dummy; do
 		case "$drvname" in *${MODULE_NAME})
@@ -298,17 +300,17 @@ if command -v dkms >/dev/null 2>&1; then
 				echo "Removing a driver that was added to dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" --all
 			else
-				echo "Uninstalling a driver that was installed by dkms."
+				echo "Removing a driver that was installed by dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" -k "${kerver}" -c "/usr/src/${drvname}-${drvver}/dkms.conf"
 			fi
 		esac
 	done
 	if [ -f /etc/modprobe.d/${OPTIONS_FILE} ]; then
-		echo "Deleting ${OPTIONS_FILE} from /etc/modprobe.d"
+		echo "Removing ${OPTIONS_FILE} from /etc/modprobe.d"
 		rm /etc/modprobe.d/${OPTIONS_FILE}
 	fi
 	if [ -d /usr/src/${DRV_NAME}-${DRV_VERSION} ]; then
-		echo "Deleting source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
+		echo "Removing source files from /usr/src/${DRV_NAME}-${DRV_VERSION}"
 		rm -r /usr/src/${DRV_NAME}-${DRV_VERSION}
 	fi
 fi
@@ -317,6 +319,8 @@ echo "Finished checking for and uninstalling previously installed drivers."
 echo ": ---------------------------"
 
 echo
+#echo "Updating driver."
+#git pull
 echo "Starting installation."
 echo "Copying ${OPTIONS_FILE} to /etc/modprobe.d"
 cp -f ${OPTIONS_FILE} /etc/modprobe.d

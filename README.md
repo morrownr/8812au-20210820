@@ -135,10 +135,12 @@ OpenWRT so it is strongly advised to use the already supported chipsets.
 * Buffalo - WI-U3-866D
 * Edimax EW-7822UAC
 * Linksys WUSB6300 V1
+* Netis WF2190
 * Rosewill RNX-AC1200UBE
+* Tenda U12
 * TP-Link Archer T4U V1
 * TRENDnet TEW-805UB
-* Netis WF2190
+
 * Numerous additional adapters that are based on the supported chipset.
 
 ### Installation Information
