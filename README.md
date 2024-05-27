@@ -35,8 +35,8 @@ information:
 - Power saving modes
 - hostapd compatible
 - AP mode DFS channel support
-- Interface modes
-  * IBSS (ad-hoc)
+- Supported Interface modes
+  * IBSS (ad-hoc) (untested)
   * Managed (client)
   * AP (master) (see file 8812au.conf for hostapd configuration information)
   * P2P-client (Wi-Fi Direct)
@@ -289,10 +289,16 @@ sudo apt install -y build-essential
 sudo apt install -y raspberrypi-kernel-headers build-essential bc dkms git
 ```
 
-- Option for Debian, Kali, and Raspberry Pi Desktop (x86)
+- Option for Debian, Kali, and Raspberry Pi Desktop (x86) (if using kali-pi for RasPi4B/5B, see note)
 
 ```
 sudo apt install -y linux-headers-$(uname -r) build-essential bc dkms git libelf-dev rfkill iw
+```
+
+Note: The following is needed if using kali-pi for RasPi4B/5B.
+
+```
+sudo apt install -y kalipi-kernel-headers build-essential bc dkms git
 ```
 
 - Option for Ubuntu (all official flavors) and the numerous Ubuntu based distros
@@ -328,7 +334,7 @@ sudo apk add linux-lts-dev make gcc
 sudo xbps-install linux-headers dkms git make
 ```
 
-- Options for Arch and Manjaro (if using Manjaro for RasPi4B, see note)
+- Options for Arch and Manjaro (if using Manjaro for RasPi4B/5B, see note)
 
 If using pacman
 
@@ -336,7 +342,7 @@ If using pacman
 sudo pacman -S --noconfirm linux-headers dkms git bc iw
 ```
 
-Note: The following is needed if using Manjaro for RasPi4B.
+Note: The following is needed if using Manjaro for RasPi4B/5B.
 
 ```
 sudo pacman -S --noconfirm linux-rpi4-headers dkms git bc
