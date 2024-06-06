@@ -1,0 +1,96 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      description: "By submitting this issue, you confirm the following conditions have been met."
+      options:
+        - label: I am not using this driver from inside a Virtual Machine.
+          required: true
+        - label: I performed all of the [installation steps](/README.md#installation-steps) as written.
+          required: true
+        - label: I have read the [FAQ](/FAQ.md) and my question is not answered there.
+          required: true
+  - type: dropdown
+    id: secure-boot
+    attributes:
+      label: Is Secure Boot enabled?
+      description: "Does your system have Secure Boot enabled?"
+      options:
+        - "No"
+        - "Yes"
+  - type: input
+    id: uname
+    attributes:
+      label: uname
+      description: "Run the command `uname -a` and paste its output here."
+      placeholder: uname -a
+    validations:
+      required: true
+  - type: input
+    id: lsusb
+    attributes:
+      label: lsusb
+      description: "Run the command `sudo lsusb` and paste its output here."
+      placeholder: sudo lsusb
+    validations:
+      required: true
+  - type: input
+    id: rfkill
+    attributes:
+      label: rfkill
+      description: "Run the command `sudo rfkill list all` and paste its output here."
+      placeholder: sudo rfkill list all
+    validations:
+      required: true
+  - type: textarea
+    id: dkms
+    attributes:
+      label: dkms
+      description: "Run the command `sudo dkms status` and paste its output here."
+      placeholder: "sudo dkms status"
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: iw
+    attributes:
+      label: iw
+      description: "Run the command `iw dev` and paste its output here."
+      placeholder: "sudo iw dev"
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: git-status
+    attributes:
+      label: git status
+      description: "Run the command `git status` from inside your clone of this repository and paste its output here."
+      placeholder: "git status"
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: install-driver
+    attributes:
+      label: install-driver.sh
+      description: "Run this repository's [`install-driver.sh` script](/install-driver.sh) and paste its output here."
+      placeholder: ./install-driver.sh
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: "Please describe the problematic behavior you are observing."
+    validations:
+      required: true
