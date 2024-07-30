@@ -30,7 +30,7 @@
 - Power saving modes
 - hostapd compatible
 - AP mode DFS channel support
-- Supported Interface modes
+- Supported interface modes
   * IBSS (ad-hoc) (untested)
   * Managed (client)
   * AP (master) (see file 8812au.conf for hostapd configuration information)
@@ -66,11 +66,12 @@
 
 ### Compatible Kernels
 
-- Kernels: 4.19 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.9  (community support)
+- Kernels: 5.4  - 5.11 (Realtek)
+- Kernels: 5.12 - 6.11 (community support)
 
 > [!NOTE]
-> Kernels earlier than 4.19 may work but are not tested or supported.
+Note: Kernels earlier than 5.4 may work but are not tested or
+supported.
 
 ### Tested Compilers
 
