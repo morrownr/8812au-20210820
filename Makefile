@@ -1,5 +1,5 @@
 EXTRA_CFLAGS += $(USER_EXTRA_CFLAGS)
-EXTRA_CFLAGS += -O1
+EXTRA_CFLAGS += -O2 -std=gnu11 -Wno-declaration-after-statement
 #EXTRA_CFLAGS += -O3
 #EXTRA_CFLAGS += -Wall
 #EXTRA_CFLAGS += -Wextra
@@ -2530,8 +2530,7 @@ sign:
 	@mokutil --import MOK.der
 	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8812au.ko
 
-sign-install:
-	sign install
+sign-install: sign install
 
 backup_rtlwifi:
 	@echo "Making backup rtlwifi drivers"
