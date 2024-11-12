@@ -190,7 +190,6 @@ static struct usb_device_id rtw_usb_id_tbl[] = {
 	{USB_DEVICE(0x2357, 0x0122), .driver_info = RTL8812}, /* TP-Link */
 	{USB_DEVICE(0x2604, 0x0012), .driver_info = RTL8812}, /* Tenda */
 	{USB_DEVICE(0x7392, 0xa822), .driver_info = RTL8812}, /* Edimax */
-	{USB_DEVICE(0x7392, 0xb822), .driver_info = RTL8812}, /* Edimax */
 #endif
 
 #ifdef CONFIG_RTL8821A
