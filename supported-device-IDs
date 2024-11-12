@@ -19,7 +19,7 @@ ID 0bda:881a - Default ID
 ID 0bda:881b - Default ID
 ID 0bda:881c - Default ID
 
-Seller specific IDs (30)
+Seller specific IDs (31)
 
 ID 0409:0408 /* NEC */
 ID 0411:025d /* Buffalo */
@@ -51,6 +51,7 @@ ID 2357:010f /* TP-Link */
 ID 2357:0122 /* TP-Link */
 ID 2604:0012 /* Tenda */
 ID 7392:a822 /* Edimax */
+ID 7392:b822 /* Edimax */
 
 If your adapter matches one of the default or seller specific
 IDs then this is the driver to use.
