@@ -51,7 +51,6 @@ ID 2357:010f /* TP-Link */
 ID 2357:0122 /* TP-Link */
 ID 2604:0012 /* Tenda */
 ID 7392:a822 /* Edimax */
-ID 7392:b822 /* Edimax */
 
 If your adapter matches one of the default or seller specific
 IDs then this is the driver to use.
