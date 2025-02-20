@@ -7,15 +7,18 @@
 > [!NOTE]
 > Please read the file ["supported-device-IDs"](./supported-device-IDs) for information about how to confirm that this is the correct driver for your adapter.
 
-> [!WARNING]
-> Posting this driver is _not_ a recommendation for Linux users to buy USB WiFi adapters based on the Realtek chipsets supported by this driver.
+> [!NOTE]
+> As of Linux kernel 6.14, a Linux Standards comliant driver for the rtl8812au chipset is available and should make your adapter both plug and play and more feature filled.
 >
-> Realtek's out-of-kernel wifi drivers, such as this one, are not Linux Wireless Standards-compliant and appear to be designed to be used by skilled programmers producing products such as embedded systems.
-> Users of desktop and server distros such as Ubuntu, Debian, Manjaro, Fedora, Raspberry Pi OS and other mainline desktop and server distros will likely find adapters that use in-kernel drivers (Linux Wireless Standards compliant) to be more stable and much more trouble-free.
-> The following links will provide more information:
+> Additional information about this new driver along with ability to report bugs can be found at the following link:
 >
-> - [USB WiFi adapters that are supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
+> https://github.com/lwfinger/rtw88
+
+> [!NOTE]
+> The following links provide a lot of information about USB WiFi and are recommended reading:
+>
 > - [USB WiFi adapter information for Linux](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapter_Information_for_Linux.md)
+> - [USB WiFi adapters that are supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
 
 ### Supported Features
 
@@ -60,22 +63,22 @@
 - x86-64, amd64
 - armv6l, armv7l (arm)
 - aarch64 (arm64)
+- riscv
 
 > [!NOTE]
-> Additional CPU architectures may work but I currently only have the hardware to test the above.
+> Additional CPU architectures may work but are not tested.
 
 ### Compatible Kernels
 
-- Kernels: 5.4  - 5.11 (Realtek)
+- Kernels: 5.10 - 5.11 (Realtek)
 - Kernels: 5.12 - 6.13 (community support)
 
 > [!NOTE]
-Note: Kernels earlier than 5.4 may work but are not tested or
-supported.
+Note: Kernels earlier than 5.10 may work but are not tested.
 
 ### Tested Compilers
 
-- gcc 11, 12 and 13
+- gcc 12, 13 and 14
 
 ### Tested Linux Distributions
 
@@ -109,9 +112,11 @@ supported.
 - [Ubuntu](https://www.ubuntu.com)
   - 22.04
     - Kernel 5.15
-  - 22.10
-    - Kernel 5.19
-    - Kernel 6.5
+  - 24.04
+    - Kernel 6.8
+  - 24.10
+    - Kernel 6.11
+  - 
 
 #### Red Hat Enterprise Linux (RHEL)
 
@@ -131,11 +136,11 @@ Current Android maintainer: none
 #### OpenWRT
 
 > [!WARNING]
-> OpenWRT is _not_ supported.
+> OpenWRT is _not_ supported with this driver.
 
-OpenWRT provides drivers for USB WiFi adapters.
-OpenWRT provided drivers include support for the MT7921au (AXE3000), MT7612u (AC1200), MT7610u (AC600) chipsets.
-It is a challenge to use Realtek based adapters that use out-of-kernel drivers with OpenWRT so it is strongly advised to use the already supported chipsets.
+OpenWRT provides drivers for USB WiFi adapters, modules and M.2 and PCIe cards.
+OpenWRT provided drivers include support for the MT7925 (BE6500), MT7921au (AXE3000), MT7612u (AC1200), MT7610u (AC600) chipsets.
+It is a challenge to use Realtek out-of-kernel drivers with OpenWRT so it is strongly advised to use the already supported chipsets.
 
 ### Compatible Devices
 
