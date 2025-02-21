@@ -71,7 +71,7 @@
 ### Compatible Kernels
 
 - Kernels: 5.10 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.13 (community support)
+- Kernels: 5.12 - 6.14 (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
