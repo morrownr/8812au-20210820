@@ -13,7 +13,7 @@
  *
  *****************************************************************************/
 
-#include "mp_precomp.h"
+#include "../mp_precomp.h"
 #include "../phydm_precomp.h"
 
 #if (RTL8812A_SUPPORT == 1)

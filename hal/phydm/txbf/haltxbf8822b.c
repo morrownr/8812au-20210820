@@ -19,8 +19,8 @@
 /*                                                           @*/
 /*@============================================================*/
 
-#include "mp_precomp.h"
-#include "phydm_precomp.h"
+#include "../mp_precomp.h"
+#include "../phydm_precomp.h"
 
 #if (RTL8822B_SUPPORT == 1)
 #ifdef PHYDM_BEAMFORMING_SUPPORT

@@ -18,7 +18,7 @@
  * This file is for 8192E TXBF mechanism
  *
  ************************************************************/
-#include "mp_precomp.h"
+#include "../mp_precomp.h"
 #include "../phydm_precomp.h"
 
 #ifdef PHYDM_BEAMFORMING_SUPPORT
