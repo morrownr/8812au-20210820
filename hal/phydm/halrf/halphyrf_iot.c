@@ -23,7 +23,7 @@
  *
  *****************************************************************************/
 
-#include "mp_precomp.h"
+#include "../mp_precomp.h"
 #include "phydm_precomp.h"
 
 #define	CALCULATE_SWINGTALBE_OFFSET(_offset, _direction, _size, _delta_thermal) \

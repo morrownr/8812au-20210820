@@ -17,8 +17,8 @@
  * include files
  *============================================================
  */
-#include "mp_precomp.h"
-#include "phydm_precomp.h"
+#include "../mp_precomp.h"
+#include "../phydm_precomp.h"
 
 u64 _sqrt(u64 x)
 {
