@@ -43,6 +43,8 @@ ccflags-y += -Wno-missing-prototypes
 ccflags-y += -Wno-missing-declarations
 ccflags-y += -Wno-empty-body
 
+ccflags-y += -Wno-implicit-function-declaration
+
 GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
 ifeq ($(GCC_VER_49),1)
 ccflags-y += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
