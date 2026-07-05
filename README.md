@@ -1,4 +1,4 @@
-Notice: An updated standards compliant (mac80211), in-kernel driver for rtl8812au chipset based adapters and modules is available and as of kernel 6.14 is of good quality. If your distro uses kernel 6.14 or later, there is no need to install this driver. The in-kernel driver is part of the rtw88 series of drivers. The in-kernel driver is Linux Standards compliant (mac80211) and is a much better driver than this one. This driver will no longer get API related updates beyond kernel 6.14 (unless provided by a user). If you use a kernel prior to 6.14, it is possible to use the new standards compliant driver by going to the following repo:
+Notice: A standards compliant (mac80211), in-kernel driver for rtl8812au chipset based adapters and modules is available and as of kernel 6.14 is of good quality. If your distro uses kernel 6.14 or later, there should be no need to install this driver. Bug reports for the in-kernel can be posted at the following repo:
 
 https://github.com/lwfinger/rtw88
 
@@ -81,14 +81,14 @@ Regards,
 ### Compatible Kernels
 
 - Kernels: 5.10 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.15 (community support)
+- Kernels: 5.12 - 7.0 (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
 
 ### Tested Compilers
 
-- gcc 12, 13 and 14
+- gcc 12, 13, 14 and 15
 
 ### Tested Linux Distributions
 
@@ -110,11 +110,8 @@ Note: Kernels earlier than 5.10 may work but are not tested.
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling)
   - Kernel 5.15
 
-- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-12-05)(ARM 32 bit and 64 bit)
-
-- [Raspberry Pi Desktop](https://www.raspberrypi.org)
-   - 2022-07-01
-     - Kernel 5.10, x86_32
+- [Raspberry Pi OS](https://www.raspberrypi.org)
+  - Kernel 6.18
 
 - [Ubuntu](https://www.ubuntu.com)
   - 22.04
@@ -123,7 +120,12 @@ Note: Kernels earlier than 5.10 may work but are not tested.
     - Kernel 6.8
   - 24.10
     - Kernel 6.11
-  - 
+  - 25.04
+    - Kernel 6.14
+  - 25.10
+    - Kernel 6.17
+  - 26.04
+    - Kernel 7.0
 
 #### Red Hat Enterprise Linux (RHEL)
 
