@@ -81,7 +81,7 @@ Regards,
 ### Compatible Kernels
 
 - Kernels: 5.10 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.14 (community support)
+- Kernels: 5.12 - 6.15 (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
@@ -98,11 +98,8 @@ Note: Kernels earlier than 5.10 may work but are not tested.
 - [Arch Linux](https://www.archlinux.org)
   - Kernels 5.4, 5.11 and 6.6
 
-- [Armbian](https://www.armbian.com/)
-   - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
-
 - [Debian](https://www.debian.org/)
-  - Kernels 5.10, 5.15, 6.1 and 6.6
+  - Kernels 5.10, 5.15, 6.1, 6.6 and 6.12
 
 - [Fedora](https://getfedora.org)
   - Fedora 38 (6.2.13-300)

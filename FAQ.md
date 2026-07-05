@@ -81,21 +81,36 @@ There are alternatives to using VMs.
 For example: Almost all Linux distros support installing in a Dualboot or Multiboot configuration.
 This will eliminate the many problems associated with using USB WiFi adapters in a VM.
 
-### Raspberry Pi 4B/400
+### Raspberry Pi
 
-> When running `sudo sh install-driver.sh` on my RasPi 4B or 400, I see the following:
+Problem: no header files detected even though they are supposedly installed
+
+Description: If you are running the 32 bit version of RasPiOS on RasPi
+hardware that is 64 bit capable, you may run into a situation were
+header files are not detected when compiling a driver. The problem is
+that if RasPiOS detects a 64 bit capable system, then it will use a
+64 bit kernel even if a 32 bit version of RasPiOS was installed. This
+confuses the situation and results in problems.
+
+> When running `sudo sh install-driver.sh` on my 64 bit RasPi hardware,
+> I see the following:
 >
 >> Your kernel header files aren't properly installed.
 >> Please consult your distro documentation or user support forums.
 >> Once the header files are properly installed, please run...
 
-The Pi 4/400 firmware now prefers the 64-bit kernel if one exists so even if you installed the 32 bit version of the RasPiOS, you may now have the 64 bit kernel active.
+The RasPiOS now prefers the 64-bit kernel if one exists so even if you
+installed the 32 bit version of the RasPiOS, you may now have the 64 bit
+kernel active.
 
-To fix, add the following to `/boot/config.txt` and reboot:
+To fix, add the following line to `/boot/config.txt` or
+`/boot/firmware/config.txt` depending on your version of
+RasPiOS:
 
 ``` text
 arm_64bit=0
 ```
+Save the file and reboot.
 
 Reference: <https://forums.raspberrypi.com/viewtopic.php?p=2091532&hilit=Tp+link#p2091532>
 
