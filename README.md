@@ -444,6 +444,58 @@ following to enroll the key:
 sudo mokutil --import /var/lib/dkms/mok.pub
 ```
 
+### Installation Steps for ARM64 (Asahi Linux)
+
+> [!NOTE]
+> These additional steps specifically address issues encountered with ARM64-based systems such as Arch Linux ARM on MacBook Pro M1/M2 running Asahi Linux.
+
+Follow the standard installation steps as described above. If you encounter the following specific error during the compilation:
+
+```shell
+/bin/sh: /usr/lib/modules/<kernel-version>/build/tools/bpf/resolve_btfids/resolve_btfids: No such file or directory
+```
+
+then apply the following workaround:
+
+1. Open the problematic file:
+
+   ```shell
+   sudo vim /usr/lib/modules/$(uname -r)/build/scripts/Makefile.modfinal
+   ```
+
+2. Locate this specific line:
+
+   ```makefile
+   $(RESOLVE_BTFIDS) -b $(objtree)/vmlinux $@;
+   ```
+
+3. Replace it entirely with:
+
+   ```makefile
+   true;
+   ```
+
+   The final section should resemble:
+
+   ```makefile
+   cmd_btf_ko = \
+   	if [ ! -f $(objtree)/vmlinux ]; then \
+   		printf \"Skipping BTF generation for %s due to unavailability of vmlinux\\n\" $@ 1>&2; \
+   	else \
+   		LLVM_OBJCOPY=\"$(OBJCOPY)\" $(PAHOLE) -J $(PAHOLE_FLAGS) $(MODULE_PAHOLE_FLAGS) --btf_base $(objtree)/vmlinux $@; \
+   		true; \
+   	fi;
+   ```
+
+4. Save the changes and proceed with the standard installation:
+
+   ```shell
+   sudo ./install-driver.sh
+   ```
+
+> [!IMPORTANT]
+> This workaround may need to be reapplied after each kernel update.
+
 ### Manual Installation Instructions
 
 The installation script, `install-driver.sh`, automates the installation process.
